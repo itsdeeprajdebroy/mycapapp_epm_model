@@ -1,0 +1,141 @@
+### My http file
+### GET Calls 
+### Service document
+http://localhost:4004/odata/v4/CatalogService/
+
+###
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+### Get all POs
+http://localhost:4004/odata/v4/CatalogService/POs
+
+### Get single PO by ID
+http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')
+
+### Get POs with Pagination
+http://localhost:4004/odata/v4/CatalogService/POs?$top=10&$skip=10
+
+### Get filtered data ( with condition -> just like where in SQL )
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=sex eq 'M'
+
+### Filter with contains or case sensitive
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameFirst, 'Jo')
+
+### Fetching Dependent data
+GET http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')?$expand=Items
+
+
+### POST Calls
+### Insert data to DB
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+    "nameFirst": "Deepraj Momota",
+    "nameMiddle": null,
+    "nameLast": "Deb Roy",
+    "nameInitials": null,
+    "sex": "M",
+    "language": "E",
+    "phoneNumber": "+1 224 374 524",
+    "email": "deepraj.momota@gmail.com",
+    "loginName": "Raj",
+    "Currency_code": "INR",
+    "salaryAmount": 55549,
+    "accountNumber": "111222333",
+    "bankId": "5100006",
+    "bankName": "My Bank of India"
+}
+
+### Update Data
+PUT http://localhost:4004/odata/v4/CatalogService/EmployeeSet/6c6f05ba-ee10-488c-8320-c726ab7dea63
+Content-Type: application/json
+
+{
+    "nameFirst": "Deepraj Kadir",
+    "nameMiddle": null,
+    "nameLast": "Deb Roy",
+    "nameInitials": null,
+    "sex": "M",
+    "language": "E",
+    "phoneNumber": "+1 224 374 524",
+    "email": "deepraj.debroy@gmail.com",
+    "loginName": "Raj",
+    "Currency_code": "INR",
+    "salaryAmount": 55549,
+    "accountNumber": "111222333",
+    "bankId": "5100006",
+    "bankName": "My Bank of India"
+}
+
+### Update Data with PUT ( means single Field )
+PUT http://localhost:4004/odata/v4/CatalogService/EmployeeSet/6c6f05ba-ee10-488c-8320-c726ab7dea63
+Content-Type: application/json
+
+{
+    "nameFirst": "Deepraj Kadir",
+    "nameMiddle": null,
+    "nameLast": "Deb Roy",
+    "nameInitials": null,
+    "sex": "M",
+    "language": "E",
+    "phoneNumber": "+1 224 374 524",
+    "email": "deepraj.debroy@gmail.com",
+    "loginName": "Raj",
+    "Currency_code": "INR",
+    "salaryAmount": 5554987,
+    "accountNumber": "111222333",
+    "bankId": "5100006",
+    "bankName": "My Bank of India"
+}
+
+### READ single employee
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet/6c6f05ba-ee10-488c-8320-c726ab7dea63
+
+### DELETE Single record
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/6c6f05ba-ee10-488c-8320-c726ab7dea63
+
+
+### Actions
+POST http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/boost
+Content-Type: application/json
+
+{}
+
+### Testing
+GET http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')
+
+###
+GET http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/largestOrder
+
+###
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C19787FB
+Content-Type: application/json
+
+{
+    "salaryAmount" : 99999999
+}
+
+### Custom entity operation
+GET http://localhost:4004/odata/v4/MyService/EmployeeSrvSet
+
+###
+POST http://localhost:4004/odata/v4/MyService/EmployeeSrvSet
+Content-Type: application/json
+
+{
+    "nameFirst": "Deepraj Kadir",
+    "nameMiddle": null,
+    "nameLast": "Deb Roy",
+    "nameInitials": null,
+    "sex": "M",
+    "language": "E",
+    "phoneNumber": "+1 224 374 524",
+    "email": "deepraj.debroy@gmail.com",
+    "loginName": "Raj",
+    "Currency_code": "INR",
+    "salaryAmount": 5554987,
+    "accountNumber": "111222333",
+    "bankId": "5100006",
+    "bankName": "My Bank of India"
+}
