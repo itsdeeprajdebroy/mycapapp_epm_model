@@ -19,5 +19,12 @@
   ],
   "sapux": [
     "app/purchaseorderapp"
-  ]
+  ],
+  "cds": {
+    "requires": {
+      "[hybrid]": {
+        "db": "hana"
+      }
+    }
+  }
 }

@@ -34,7 +34,7 @@ annotate service.POs with @(
             },
             {
                 $Type : 'UI.DataField',
-                Value : OverallStatus,
+                Value : OVERALL_STATUS,
                 Criticality: Criticality
             },
         ],

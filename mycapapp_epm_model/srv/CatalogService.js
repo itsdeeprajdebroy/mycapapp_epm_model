@@ -1,7 +1,33 @@
 const cds = require("@sap/cds");
 
 module.exports = cds.service.impl(async function (srv) {
+  
   const { EmployeeSet, POs } = srv.entities;
+
+  srv.after('READ', POs, (results) => {
+
+     results.forEach(po => {
+
+      switch (po.OVERALL_STATUS) {
+
+        case 'P':
+          po.OVERALL_STATUS = 'PENDING';
+          po.Criticality = 2; // Warning (Yellow)
+          break;
+
+        case 'D':
+          po.OVERALL_STATUS = 'DISCONTINUED';
+          po.Criticality = 3; // Error (Red)
+          break;
+
+        default:
+          po.OVERALL_STATUS = 'UNKNOWN';
+          po.Criticality = 0; // Neutral (Grey)
+      }
+
+    });
+
+  });
 
   srv.before("UPDATE", EmployeeSet, function (req) {
     if (parseFloat(req.data.salaryAmount) > 10000000) {
