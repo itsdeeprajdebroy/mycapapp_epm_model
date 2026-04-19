@@ -172,7 +172,8 @@
                     "route": "POitemsObjectPage"
                   }
                 }
-              }
+              },
+              "sectionLayout": "Tabs"
             }
           },
           "controlAggregation": "midColumnPages",
