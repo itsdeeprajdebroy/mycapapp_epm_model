@@ -2,6 +2,7 @@
   "name": "mycapapp_epm_model",
   "version": "1.0.0",
   "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.15.10",
     "@cap-js/hana": "^2",
     "@sap/cds": "^9"
   },
