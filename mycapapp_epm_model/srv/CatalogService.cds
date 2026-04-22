@@ -1,11 +1,22 @@
 using {anubhav.db} from '../db/datamodel';
 using {cappo.cds} from '../db/CDSViews';
 
-service CatalogService @(path: 'CatalogService') {
+service CatalogService @(path: 'CatalogService', requires: 'authenticated-user') {
 
      entity BusinessPartnerSet               as projection on db.master.businesspartner;
      entity AddressSet                       as projection on db.master.address;
-     entity EmployeeSet                      as projection on db.master.employees;
+
+     entity EmployeeSet @(restrict: [
+          {
+               grant: ['READ'],
+               to   : 'Viewer',
+               where: 'bankName = $user.BankName'
+          },
+          {
+               grant: ['WRITE'],
+               to   : 'Admin'
+          }
+     ])                                      as projection on db.master.employees;
 
      // Boost action for POs - Adding 20000 on PO if we click
      entity POs @(odata.draft.enabled: true) as
