@@ -26,6 +26,23 @@ modules:
     requires:
       - name: mycapapp_epm_model-db
       - name: mycapapp_epm_model-auth
+  
+  - name: mycapapp_epm_model-ui
+    type: nodejs
+    path: app
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          strictSSL: true
+          forwardAuthToken: true
+          url: '~{srv-url}'
+      - name: mycapapp_epm_model-auth 
 
   - name: mycapapp_epm_model-db-deployer
     type: hdb
